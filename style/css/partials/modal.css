@@ -1,0 +1,200 @@
+:root[data-theme=theme-light] {
+  --background: #F7F7F7;
+  --textColor: #5b5b5b;
+  --textColor-rgb: 91 91 91;
+  --secondaryTextColor: #F6F8FF;
+  --secondaryTextColor-rgb: 246 248 255;
+  --primary: #2191EB;
+  --primary-rgb: 33 145 235;
+  --secondary: #F5F5F5;
+  --secondary-rgb: 245 245 245;
+  --light: #fff;
+  --success: #00BFA6;
+  --success-rgb: 0 191 166;
+  --danger: #F50057;
+  --danger-rgb: 245 0 87;
+  --warning: #F9A826;
+  --warning-rgb: 249 168 38;
+}
+
+:root[data-theme=theme-dark] {
+  --background: #161B22;
+  --textColor: #fff;
+  --textColor-rgb: 255 255 255;
+  --secondaryTextColor: #fff;
+  --secondaryTextColor-rgb: 255 255 255;
+  --primary: #2191EB;
+  --primary-rgb: 33 145 235;
+  --secondary: #161B22;
+  --secondary-rgb: 18 18 18;
+  --light: #0D1117;
+  --success: #00BFA6;
+  --success-rgb: 0 191 166;
+  --danger: #F50057;
+  --danger-rgb: 245 0 87;
+  --warning: #F9A826;
+  --warning-rgb: 249 168 38;
+}
+
+/**
+* Overlay
+* -- only show for tablet and up
+*/
+@media only screen and (min-width: 40em) {
+  .modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgb(var(--secondary-rgb)/65%);
+    opacity: 0;
+    visibility: hidden;
+    backface-visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), visibility 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  }
+  .modal-overlay .close-modal {
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    right: 15px;
+    border-radius: 20%;
+    opacity: 1;
+    animation: pulse 1s infinite;
+    backface-visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), transform 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+    transition-delay: 0.06s;
+  }
+  .modal-overlay .close-modal svg {
+    width: 3em;
+    height: 3em;
+  }
+  .modal-overlay .close-modal svg path {
+    fill: var(--textColor);
+  }
+  @-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(92, 145, 255, 0.4);
+    }
+    70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(92, 145, 255, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(92, 145, 255, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 rgba(92, 145, 255, 0.4);
+      box-shadow: 0 0 0 0 rgba(92, 145, 255, 0.4);
+    }
+    70% {
+      -moz-box-shadow: 0 0 0 10px rgba(92, 145, 255, 0);
+      box-shadow: 0 0 0 10px rgba(92, 145, 255, 0);
+    }
+    100% {
+      -moz-box-shadow: 0 0 0 0 rgba(92, 145, 255, 0);
+      box-shadow: 0 0 0 0 rgba(92, 145, 255, 0);
+    }
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+/**
+* Modal
+*/
+.modal {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto;
+  background-color: var(--light);
+  width: 600px;
+  max-width: 75rem;
+  min-height: 20rem;
+  border-radius: 0.3em;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+  transform: scale(1.2);
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.modal .modal-content {
+  word-break: break-word;
+  opacity: 0;
+  backface-visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  transition-delay: 0.06s;
+  width: 100%;
+  overflow: hidden;
+}
+.modal .modal__body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  padding-bottom: 8rem;
+  position: relative;
+}
+.modal .modal__footer {
+  position: absolute;
+  bottom: 0rem;
+  padding: 1rem;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+  background: var(--light);
+  box-sizing: border-box;
+}
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+.modal.active .modal-content {
+  opacity: 1;
+}
+
+.modal--lg {
+  width: 900px;
+}
+
+/**
+* Mobile styling
+*/
+@media only screen and (max-width: 39.9375em) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+    transform: scale(1.1);
+    padding: 0 !important;
+  }
+
+  .close-modal {
+    right: 20px !important;
+  }
+}
+
+/*# sourceMappingURL=modal.css.map */

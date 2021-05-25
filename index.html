@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script data-main="init" src="js/vendor/require.js"></script>
+</head>
+<body data-bind="visible:true" style="display: none">
+	<div data-bind="page: { id: '', role:'start', withOnShow: loadPage }" class="page flex flex--row" style="padding: 1rem;display: flex;flex-direction: row;">
+		<div class="flex flex--column page__left" style="justify-content: flex-start; position: relative;">
+			<div style="position: absolute;right: .2rem;top: .2rem;align-items: center;" class="flex flex--row">
+				<i class="far fa-sun vm--align"></i>
+				&nbsp;
+				<div data-bind="component:{ name:'toggle-widget', params:{ value: isLightTheme, visible: true, editable: true } }" class="vm--align"></div>
+				&nbsp;
+				<i class="far fa-moon vm--align"></i>
+			</div>
+			<!-- ko with: profile -->
+			<div class="text--center page__left-image">
+				<img data-bind="attr:{'src': image }">
+			</div>
+			<!-- /ko -->
+			<div class="text--center">
+				<!-- ko with: profile -->
+				<h3 style="font-weight: 900;" data-bind="text: name">Mario Ruci</h3>
+				<h5 data-bind="text: title">Software Engineer</h5>
+				<!-- /ko -->
+				<a class="btn btn-primary btn-md" href="php/resume.php" target="_blank">
+					<i class="fas fa-download"></i>
+					Download CV
+				</a>
+				<!-- ko with: links -->
+				<a class="btn btn-secondary btn-md" data-bind="attr:{'href': github}" target="_blank" rel="nofollow noopener noreferrer" aria-label="GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i>
+				</a>
+				<a class="btn btn-secondary btn-md" data-bind="attr:{'href': linkedin}" target="_blank" rel="nofollow noopener noreferrer" aria-label="Linkedin">
+					<i class="fab fa-linkedin-in" aria-hidden="true"></i>
+				</a>
+				<a href="mailto:marioruci15@gmail.com" class="btn btn-secondary btn-md" target="_blank" rel="nofollow noopener noreferrer" aria-label="Email">
+					<i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+				</a>
+				<!-- /ko -->
+			</div>
+			<div class="page__left-inner">
+				<!-- ko if: skills().length > 0 -->
+				<label class="text--bold font--10">
+					<i class="fas fa-code font--17"></i>
+					Tools & Technologies
+				</label>
+				<ul class="font--12" style="list-style: square;" data-bind="foreach: skills">
+					<li data-bind="text: text"></li>
+				</ul>
+				<!-- /ko -->
+				<!-- ko if: languages().length > 0 -->
+				<label class="text--bold font--10">
+					<i class="fas fa-language font--17"></i>
+					Languages
+				</label>
+				<div class="flex flex--row" style="justify-content: center;" data-bind="foreach: languages">
+					<div class="font--12 btn btn-light btn-sm" data-bind="text: $data">
+					</div>
+				</div>
+				<!-- /ko -->
+			</div>
+		</div>
+		<div class="flex flex--column page__right">
+			<div class="card" data-bind="visible: intro">
+				<div>
+					<h1 style="font-weight: 950;" class="font--35">Hi, my name is Mario.</h1>
+				</div>
+				<div class="flex flex--row" style="align-items: center;">
+					<<span class="text--warning">code</span>>
+					I create
+					&nbsp;
+					<div class="text--bold text--warning" data-bind="typed: strings"></div>
+					<<span class="text--warning">/code</span>>
+				</div>
+				<div class="font--14 mtop--10" data-bind="html: intro">
+				</div>
+			</div>
+			<div class="mtop--20 card" data-bind="visible: education().length > 0">
+				<h3>
+					<i class="fas fa-university"></i>
+					Education
+				</h3>
+				<!-- ko foreach: education -->
+				<div class="flex flex--column">
+					<div class="flex flex--column mtop--10">
+						<div class='card card--bordered'>
+							<div class="flex flex--row" style="align-items: center;">
+								<div class="text--bold" data-bind="text: title" style="flex-basis: 72%">
+								</div>
+								<div class="btn btn-secondary btn-sm btn-rounded" style="margin-left: auto;" data-bind="text: year">
+								</div>
+							</div>
+							<div data-bind="text: text">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /ko -->
+			</div>
+			<div class='flex flex--row card mtop--10' data-bind="visible: (experience().length > 0) || (education().length > 0)">
+				<div class="" style="flex-basis: 49%;margin-left: 1%;" data-bind="visible: experience().length > 0">
+					<h3>
+						<i class="fas fa-briefcase"></i>
+						Experience
+					</h3>
+					<!-- ko foreach: experience -->
+					<div class="flex flex--column mtop--10">
+						<div class='card card--bordered'>
+							<div class="flex flex--row" style="align-items: center;">
+								<div class="text--bold" data-bind="text: title">
+								</div>
+								<div class="btn btn-secondary btn-sm btn-rounded" style="margin-left: auto;" data-bind="text: year">
+								</div>
+							</div>
+							<div data-bind="html: text">
+							</div>
+							<a data-bind="attr:{'href': link}" target="_blank">
+								<i class="fas fa-external-link-alt"></i>
+								Visit
+							</a>
+						</div>
+					</div>
+					<!-- /ko -->
+				</div>
+				<div class="" style="flex-basis: 49%;margin-left: 1%;" data-bind="visible: projects().length > 0">
+					<h3>
+						<i class="fas fa-project-diagram"></i>
+						Personal projects
+					</h3>
+					<div class="flex flex--column" style="flex-wrap: wrap;">
+						<!-- ko foreach: projects -->
+						<div class="card card--bordered flex flex--row mtop--10" style="flex-basis: 50%;">
+							<div style="flex-basis: 50%;">
+								<img data-bind="attr:{'src': 'images/'+logo}" class="img--responsive personal__project-img">
+								<div data-bind="text: text">
+								</div>
+								<button class="btn btn-secondary btn-sm">
+									Learn more...
+								</button>
+							</div>
+							<div style="flex-basis: 50%;">
+								<img data-bind="attr:{'src': 'images/'+image}" class="img--responsive">
+							</div>
+						</div>
+						<!-- /ko -->
+					</div>
+				</div>
+			</div>
+			<div class="mtop--20 card">
+				<h3>Contact me</h3>
+				<div class="flex flex--row">
+					<div style="flex-basis: 50%;margin: 4px;">
+						<input style="width:100%;" data-bind="value: name" type="text" placeholder="Name">
+					</div>
+					<div style="flex-basis: 50%;margin: 4px;">
+						<input style="width:100%;" type="text" data-bind="value: surname" placeholder="Surname">
+					</div>
+				</div>
+				<div class="flex flex--row" style="margin: 4px;">
+					<input style="width:100%;" data-bind="value: email, css:{'input--required': !email() }" type="email" placeholder="Email">
+				</div>
+				<div class="flex flex--row" style="margin: 4px;">
+					<textarea data-bind="value: message, css:{'input--required':!message()}" placeholder="Message"></textarea>
+				</div>
+				<div style="margin: 4px;">
+					<button class="btn btn-primary" data-bind="enable: canSend, click: _sendMessage">
+						<i class="fas fa-paper-plane"></i>
+						Send
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

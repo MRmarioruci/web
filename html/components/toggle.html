@@ -1,0 +1,24 @@
+<div data-bind="visible:visible" style="white-space:nowrap;">
+	<!-- ko ifnot: isCheckbox -->
+	<div class="visible--xs">
+		<div class="md__input inline-block">
+			<input type="checkbox" class="" data-bind="checked: value, enabled: enabled, attr:{'id': id}">
+		</div>
+	</div>
+	<div class="hidden--xs text-left inline-block vmid">
+		<div data-bind="css:{'disabled':!enabled()}" class="md__input inline-block">
+			<input type="checkbox" class="switch" data-bind="checked: value, enabled: enabled, attr:{'id': id}">
+		</div>
+		</div>
+		<!-- ko ifnot:editable -->
+			<i class="fas fa-lock" ></i>
+		<!-- /ko -->
+	<!-- /ko -->
+	<!-- ko if: isCheckbox -->
+	<div>
+		<div class="md__input inline-block">
+			<input type="checkbox" class="" data-bind="checked: value, enabled: enabled, attr:{'id': id}">
+		</div>
+	</div>
+	<!-- /ko -->
+</div>

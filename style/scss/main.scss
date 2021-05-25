@@ -1,0 +1,116 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import "partials/vars";
+@import "partials/buttons";
+@import "partials/forms";
+@import "partials/typography";
+@import "partials/helpers";
+@import "partials/table";
+@import "partials/misc";
+@import "partials/dropdown";
+@import "partials/tabs";
+@import "partials/timeline";
+*{
+	box-sizing: border-box;
+}
+html{
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+body{
+	font-size: 15px;
+	font-family: 'Poppins', sans-serif;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: var(--background);
+	color: var(--textColor);
+	width: 100%;
+	overflow: hidden;
+	padding: 0rem;
+	margin: 0rem;
+}
+span{
+	display: inline-block;
+}
+a{
+	text-decoration: none;
+}
+.page{
+	width: 1500px;
+	max-width: 100%;
+	display: flex;
+	height: 100%;
+	margin: 0rem;
+	padding: 0rem;
+	position: relative;
+	flex-direction: column;
+	margin: auto;
+
+
+	.page__left{
+		flex-basis:25%;
+		height: 100%;
+		background: var(--light);
+		box-shadow: 0px 3px 6px 1px rgb(38 107 193 / 8%);
+		padding: 1rem;
+		border-radius: $radius;
+
+		.page__left-image{
+			width:80px;
+			height: 80px;
+			border-radius:50%;
+			overflow: hidden;
+			border: 2px solid var(--primary);
+			position: relative;
+			box-shadow: 0px 3px 9px 1px rgb(var(--primary-rgb) / 80%);
+
+			img{
+				width:80px;
+				height: 80px;
+				border-radius:50%;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		}
+
+		.page__left-inner{
+			width:100%;
+			background: var(--secondary);
+			height: 75%;
+			padding: .5rem;
+			overflow-y: auto;
+			overflow-x: hidden;
+			display: flex;
+			flex-direction: column;
+			border-radius: var(--radius);
+			margin-top: .5rem;
+		}
+	}
+	.page__right{
+		flex-basis: 74%;
+		height: 100%;
+		margin-left: 1%;
+		padding: 1rem;
+		border-radius: var(--radius);
+		overflow-y: auto;
+	}
+}
+.card{
+	padding: rem(10);
+	background: var(--light);
+	border-radius: var(--radius);
+	box-shadow: 0px 3px 6px 1px rgb(38 107 193 / 8%);
+}
+.card--bordered{
+	border: 2px solid var(--secondary);
+	box-shadow: unset;
+}
+:root[data-theme="theme-dark"] {
+	.personal__project-img{
+		filter: invert(1);
+	}
+}
