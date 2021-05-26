@@ -9,7 +9,7 @@
 @import "partials/misc";
 @import "partials/dropdown";
 @import "partials/tabs";
-@import "partials/timeline";
+@import "partials/spinner";
 *{
 	box-sizing: border-box;
 }
@@ -41,13 +41,15 @@ a{
 .page{
 	width: 1500px;
 	max-width: 100%;
-	display: flex;
 	height: 100%;
 	margin: 0rem;
 	padding: 0rem;
 	position: relative;
 	flex-direction: column;
 	margin: auto;
+	padding: 1rem;
+	display: flex !important;
+	flex-direction: row !important;
 
 
 	.page__left{
@@ -57,6 +59,8 @@ a{
 		box-shadow: 0px 3px 6px 1px rgb(38 107 193 / 8%);
 		padding: 1rem;
 		border-radius: $radius;
+		justify-content: flex-start;
+		position: relative;
 
 		.page__left-image{
 			width:80px;
@@ -97,6 +101,12 @@ a{
 		padding: 1rem;
 		border-radius: var(--radius);
 		overflow-y: auto;
+	}
+	.page__themeSwitch{
+		position: absolute;
+		right: .2rem;
+		top: .2rem;
+		align-items: center;
 	}
 }
 .card{

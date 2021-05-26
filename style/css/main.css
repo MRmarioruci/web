@@ -1561,187 +1561,128 @@ a.dropdown-item.active, button.dropdown-item.active {
   background: rgb(var(--primary-rgb)/10%);
 }
 
-.iphonex {
-  width: 20em;
-  height: 40em;
-  display: inline-flex;
-  position: relative;
-  transform: rotate(0deg);
-  transition: all cubic-bezier(0.36, 0.41, 0.38, 1) 0.4s;
-  z-index: 10;
+:root[data-theme=theme-light] {
+  --background: #F7F7F7;
+  --textColor: #5b5b5b;
+  --textColor-rgb: 91 91 91;
+  --secondaryTextColor: #F6F8FF;
+  --secondaryTextColor-rgb: 246 248 255;
+  --primary: #2191EB;
+  --primary-rgb: 33 145 235;
+  --secondary: #F5F5F5;
+  --secondary-rgb: 245 245 245;
+  --light: #fff;
+  --success: #00BFA6;
+  --success-rgb: 0 191 166;
+  --danger: #F50057;
+  --danger-rgb: 245 0 87;
+  --warning: #F9A826;
+  --warning-rgb: 249 168 38;
 }
 
-.iphonex:hover ~ .title {
-  opacity: 0;
+:root[data-theme=theme-dark] {
+  --background: #161B22;
+  --textColor: #fff;
+  --textColor-rgb: 255 255 255;
+  --secondaryTextColor: #fff;
+  --secondaryTextColor-rgb: 255 255 255;
+  --primary: #2191EB;
+  --primary-rgb: 33 145 235;
+  --secondary: #161B22;
+  --secondary-rgb: 18 18 18;
+  --light: #0D1117;
+  --success: #00BFA6;
+  --success-rgb: 0 191 166;
+  --danger: #F50057;
+  --danger-rgb: 245 0 87;
+  --warning: #F9A826;
+  --warning-rgb: 249 168 38;
 }
 
-.iphonex .back {
-  display: flex;
-  flex: 1;
-  margin: 0.2em;
-  border-radius: 3em;
-  position: absolute;
-  z-index: 1;
-  width: calc( 100% - 0.6em );
-  height: calc( 100% - 0.6em );
+.spinner-wrap {
+  position: fixed;
+  left: 0;
   top: 0;
-  right: 0;
-  transition: all 0.4s;
-}
-
-.iphonex .front {
-  display: flex;
-  flex: 1;
-  background-color: var(--secondary);
-  border-radius: 3em;
-  margin: 0.2em;
-  overflow: hidden;
-  position: relative;
-  z-index: 10;
-}
-
-.iphonex .screen {
-  display: flex;
-  flex: 1;
-  background-color: var(--light);
-  margin: 0em;
-  border-radius: 2.6em;
-  border: solid 0.2em var(--secondary);
-  position: relative;
-  z-index: 10;
-}
-
-.iphonex .front__line {
-  position: absolute;
-  z-index: 8;
   width: 100%;
-  height: 0.5em;
-  top: 10%;
-}
-
-.iphonex .front__line-second {
-  top: 90%;
-}
-
-.iphonex .screen .screen__view {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin: 0.6em;
-  border-radius: 2em;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
-
-.iphonex .screen .screen__front {
-  position: absolute;
-  width: 50%;
-  background-color: var(--secondary);
-  height: 1.8em;
-  border-radius: 0 0 0.9em 0.9em;
-  right: 25%;
-  top: -10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 0.3em;
-  box-sizing: border-box;
-  margin-top: 0.5em;
+  height: 100%;
   z-index: 999;
+  background: rgb(var(--secondary-rgb)/100%);
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-.iphonex .screen .screen__front::after, .iphonex .screen .screen__front::before {
+.spinners {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.spinners .spinner-block {
+  width: 125px;
+  text-align: center;
+  margin-right: 83px;
+}
+.spinners .spinner-block:nth-child(5n) {
+  margin-right: 0px;
+}
+
+/* YOU NEED THESE STYLES */
+/* spinner style */
+.spinner {
+  position: relative;
+  width: 125px;
+  height: 125px;
+}
+.spinner:before, .spinner:after {
   content: "";
-  width: 10%;
-  height: 50%;
+  display: block;
   position: absolute;
-  background: transparent;
-  top: -0.3em;
-  border: solid 0.4em var(--secondary);
-  border-bottom: 0;
-}
-
-.iphonex .screen .screen__front::after {
-  left: 0.4em;
-  transform: translateX(-100%);
-  border-left: 0;
-  border-radius: 0 0.7em 0 0;
-}
-
-.iphonex .screen .screen__front::before {
-  right: 0.4em;
-  transform: translateX(100%);
-  border-right: 0;
-  border-radius: 0.7em 0 0 0;
-}
-
-.iphonex .screen .screen__front-speaker {
-  background: var(--secondary);
-  border-radius: 0.2em;
-  height: 0.35em;
-  width: 28%;
-}
-
-.iphonex .screen .screen__front-camera {
-  height: 0.35em;
-  width: 0.35em;
-  background: var(--secondary);
-  margin-left: 0.5em;
+  border-width: 4px;
+  border-style: solid;
   border-radius: 50%;
-  margin-right: -0.8em;
 }
 
-.iphonex .phoneButtons {
-  width: 1em;
-  height: 6em;
-  position: absolute;
-  z-index: 2;
-  background: linear-gradient(to bottom, var(--secondary), var(--secondary), var(--secondary));
-  box-shadow: 0 0 0.4em rgba(255, 255, 255, 0.1) inset;
-  border-radius: 2px;
-}
-
-.iphonex .phoneButtons-right {
-  right: 0;
-  top: 30%;
-}
-
-.iphonex .phoneButtons-left {
-  left: 0;
-  top: 15%;
-  height: 3em;
-}
-
-.iphonex .phoneButtons-left2 {
-  left: 0;
-  top: 25%;
-  height: 5em;
-}
-
-.iphonex .phoneButtons-left3 {
-  left: 0;
-  top: calc( 25% + 6em);
-  height: 5em;
-}
-
-@media (max-height: 40em) {
-  body {
-    font-size: 70%;
+/* spinner-1 styles */
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0deg);
   }
-
-  .iphonex {
-    width: 48vh;
-    height: 94vh;
-  }
-
-  .title .title__svg svg text {
-    font-size: 4em;
+  100% {
+    transform: rotate(360deg);
   }
 }
+@keyframes anti-rotate-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.spinner.spinner-1:before {
+  width: 117px;
+  height: 117px;
+  border-bottom-color: var(--textColor-rgb);
+  border-right-color: var(--textColor-rgb);
+  border-top-color: rgb(var(--textColor-rgb)/0%);
+  border-left-color: rgb(var(--textColor-rgb)/0%);
+  top: 0px;
+  left: 0px;
+  animation: rotate-animation 1s linear 0s infinite;
+}
+.spinner.spinner-1:after {
+  width: 81.9px;
+  height: 81.9px;
+  border-bottom-color: var(--textColor-rgb);
+  border-right-color: var(--textColor-rgb);
+  border-top-color: rgb(var(--textColor-rgb)/0%);
+  border-left-color: rgb(var(--textColor-rgb)/0%);
+  top: 17.55px;
+  left: 17.55px;
+  animation: anti-rotate-animation 0.85s linear 0s infinite;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1778,13 +1719,15 @@ a {
 .page {
   width: 1500px;
   max-width: 100%;
-  display: flex;
   height: 100%;
   margin: 0rem;
   padding: 0rem;
   position: relative;
   flex-direction: column;
   margin: auto;
+  padding: 1rem;
+  display: flex !important;
+  flex-direction: row !important;
 }
 .page .page__left {
   flex-basis: 25%;
@@ -1793,6 +1736,8 @@ a {
   box-shadow: 0px 3px 6px 1px rgba(38, 107, 193, 0.08);
   padding: 1rem;
   border-radius: 0.3em;
+  justify-content: flex-start;
+  position: relative;
 }
 .page .page__left .page__left-image {
   width: 80px;
@@ -1830,6 +1775,12 @@ a {
   padding: 1rem;
   border-radius: var(--radius);
   overflow-y: auto;
+}
+.page .page__themeSwitch {
+  position: absolute;
+  right: 0.2rem;
+  top: 0.2rem;
+  align-items: center;
 }
 
 .card {

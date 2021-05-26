@@ -8,15 +8,27 @@ define([
 ], (ko) => {
 	class MainPage {
 		constructor(){
+			this.inited = ko.observable(false);
+			this.generating = ko.observable(false);
+
 			this.isLightTheme = ko.observable(false);
 			this.isLightTheme.subscribe( (newVal) => {
-				const html = document.querySelector('html');
 				if(!newVal){
-					html.dataset.theme = 'theme-light';
+					this.setTheme('theme-light');
 				}else{
-					html.dataset.theme = 'theme-dark';
+					this.setTheme('theme-dark');
 				}
 			})
+			this.compTheme = ko.computed( () => {
+				let theme = localStorage.getItem('mr__theme');
+				if(theme == 'theme-light'){
+					this.isLightTheme(false)
+				}else{
+					this.isLightTheme(true)
+				}
+				return true;
+			})
+
 			this.strings = ko.observableArray([
 				'web apps',
 				'desktop apps',
@@ -71,10 +83,25 @@ define([
 					return language;
 				}))
 				this.profile(data.profile);
+				setTimeout( () => {
+					this.inited(true);
+				}, 500)
 			})
 			.catch( (err) => {
 				console.error(err);
 			})
+		}
+		setTheme(theme){
+			const html = document.querySelector('html');
+			html.dataset.theme = theme//'theme-light';
+			localStorage.setItem('mr__theme', theme);
+		}
+		generateResume(){
+			this.generating(true);
+			setTimeout(() =>{
+				this.generating(false);
+				window.open('/php/resume.php');
+			}, 500);
 		}
 		_getData(){
 			return new Promise( (resolve, reject) => {

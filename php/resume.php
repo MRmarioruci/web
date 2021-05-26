@@ -95,21 +95,21 @@ $html .="
     ".$data['intro']."
   </div>
   <div style='margin-top: 10px;'>
-    <div style='border-left:2px solid #3689CF;color: #3689CF;padding-left: 5px;font-size:13px;font-weight: 900;'>EXPERIENCE</div>
+    <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>EXPERIENCE</div>
     <div style='margin-top: -10px;'>".$experience."</div>
   </div>
   <div style='margin-top: 10px;'>
-   <div style='border-left:2px solid #3689CF;color: #3689CF;padding-left: 5px;font-size:13px;font-weight: 900;'>PROJECTS</div>
+  <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>PROJECTS</div>
     <div style='margin-top: -10px'>".$projects."</div>
   </div>
 
 </div>
 <div style='width: 30%;display: inline-block;vertical-align: top;'>
 	<div>
-    G.Gennimata 3 Athens(Greece)
+    ".$profile['address']."
   </div>
   <div>
-    <b>(31) 6949809063</b>
+    <b>".$profile['mobile']."</b>
   </div>
   <div>
     <a target='_blank' href=".$links['website'].">Website</a><br>
@@ -118,21 +118,21 @@ $html .="
     <b>".$links['email']."</b><br>
   </div>
   <div style='margin-top: 30px;'>
-  <div style='border-left:2px solid #3689CF;color: #3689CF;padding-left: 5px;font-size:13px;font-weight: 900;'>Tools & Technologies</div>
+  <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>TOOLS & TECHNOLOGIES</div>
     <br>
     <ul style='list-style: square;padding-left: 20px;'>
       ".$sk."
     </ul>
   </div>
-  <div style='margin-top: 30px;'>
-    <div style='border-left:2px solid #3689CF;color: #3689CF;padding-left: 5px;font-size:13px;font-weight: 900;'>LANGUAGES</div>
+  <div style='margin-top: 20px;'>
+  <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>LANGUAGES</div>
     <br>
     <ul style='list-style: square;padding-left: 20px;'>
       ".$lang."
     </ul>
   </div>
   <div style='margin-top: 20px;'>
-    <div style='border-left:2px solid #3689CF;color: #3689CF;padding-left: 5px;font-size:13px;font-weight: 900;'>EDUCATION</div>
+  <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>EDUCATION</div>
     <div>".$education."</div>
   </div>
 </div>
@@ -150,6 +150,6 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream($profile['name']."_Resume.pdf");
+$dompdf->stream(str_replace(' ', '', $profile['name'])."_Resume.pdf");
 
 ?>

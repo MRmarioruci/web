@@ -6,9 +6,10 @@
 	<script data-main="init" src="js/vendor/require.js"></script>
 </head>
 <body data-bind="visible:true" style="display: none">
-	<div data-bind="page: { id: '', role:'start', withOnShow: loadPage }" class="page flex flex--row" style="padding: 1rem;display: flex;flex-direction: row;">
-		<div class="flex flex--column page__left" style="justify-content: flex-start; position: relative;">
-			<div style="position: absolute;right: .2rem;top: .2rem;align-items: center;" class="flex flex--row">
+	<div data-bind="page: { id: '', role:'start', withOnShow: loadPage }" class="page">
+		<!-- ko if: inited -->
+		<div class="flex flex--column page__left">
+			<div class="flex flex--row page__themeSwitch">
 				<i class="far fa-sun vm--align"></i>
 				&nbsp;
 				<div data-bind="component:{ name:'toggle-widget', params:{ value: isLightTheme, visible: true, editable: true } }" class="vm--align"></div>
@@ -25,9 +26,14 @@
 				<h3 style="font-weight: 900;" data-bind="text: name">Mario Ruci</h3>
 				<h5 data-bind="text: title">Software Engineer</h5>
 				<!-- /ko -->
-				<a class="btn btn-primary btn-md" href="php/resume.php" target="_blank">
+				<a class="btn btn-primary btn-md" data-bind="click: generateResume" target="_blank">
+					<!-- ko ifnot: generating -->
 					<i class="fas fa-download"></i>
 					Download CV
+					<!-- /ko -->
+					<!-- ko if: generating -->
+					Generating...
+					<!-- /ko -->
 				</a>
 				<!-- ko with: links -->
 				<a class="btn btn-secondary btn-md" data-bind="attr:{'href': github}" target="_blank" rel="nofollow noopener noreferrer" aria-label="GitHub">
@@ -66,7 +72,7 @@
 		<div class="flex flex--column page__right">
 			<div class="card" data-bind="visible: intro">
 				<div>
-					<h1 style="font-weight: 950;" class="font--35">Hi, my name is Mario.</h1>
+					<h1 style="font-weight: 950;" class="font--35">It's-a me Mario.</h1>
 				</div>
 				<div class="flex flex--row" style="align-items: center;">
 					<<span class="text--warning">code</span>>
@@ -173,6 +179,14 @@
 				</div>
 			</div>
 		</div>
+		<!-- /ko -->
+		<!-- ko ifnot: inited -->
+		<div class="spinner-wrap">
+			<div class="spinner-block" style="margin-top: 20%;">
+				<div class="spinner spinner-1"></div>
+			</div>
+		</div>
+		<!-- /ko -->
 	</div>
 </body>
 </html>

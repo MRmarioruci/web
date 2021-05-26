@@ -113,7 +113,9 @@ function getProfile(){
 	return [
 		'image' => 'images/mario.jpg',
 		'name' => 'Mario Ruci',
-		'title' => 'Software Engineer'
+		'title' => 'Software Engineer',
+		'address' => 'G.Gennimata 3 Athens(Greece)',
+		'phone' => '(+31) 6949809063'
 	];
 }
 ?>
