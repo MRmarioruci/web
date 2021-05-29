@@ -42,7 +42,7 @@
 				<a class="btn btn-secondary btn-md" data-bind="attr:{'href': linkedin}" target="_blank" rel="nofollow noopener noreferrer" aria-label="Linkedin">
 					<i class="fab fa-linkedin-in" aria-hidden="true"></i>
 				</a>
-				<a href="mailto:marioruci15@gmail.com" class="btn btn-secondary btn-md" target="_blank" rel="nofollow noopener noreferrer" aria-label="Email">
+				<a data-bind="copyClipboardBH: email" class="btn btn-secondary btn-md" target="_blank" rel="nofollow noopener noreferrer" aria-label="Email">
 					<i class="fas fa-envelope-open-text" aria-hidden="true"></i>
 				</a>
 				<!-- /ko -->
@@ -74,12 +74,16 @@
 				<div>
 					<h1 style="font-weight: 950;" class="font--35">It's-a me Mario.</h1>
 				</div>
-				<div class="flex flex--row" style="align-items: center;">
-					<<span class="text--warning">code</span>>
-					I create
-					&nbsp;
-					<div class="text--bold text--warning" data-bind="typed: strings"></div>
-					<<span class="text--warning">/code</span>>
+				<div class="flex flex--column" style="align-items: flex-start;">
+					<div>
+						<<span class="text--warning">code</span>>
+					</div>
+					<div style="margin-left: 30px;" class="flex flex--row">
+						I create &nbsp;<div class="text--bold text--warning" data-bind="typed: strings"></div>
+					</div>
+					<div>
+						<<span class="text--warning">/code</span>>
+					</div>
 				</div>
 				<div class="font--14 mtop--10" data-bind="html: intro">
 				</div>
@@ -106,8 +110,8 @@
 				</div>
 				<!-- /ko -->
 			</div>
-			<div class='flex flex--row card mtop--10' data-bind="visible: (experience().length > 0) || (education().length > 0)">
-				<div class="" style="flex-basis: 49%;margin-left: 1%;" data-bind="visible: experience().length > 0">
+			<div class='flex flex--row card mtop--10 page__exp' data-bind="visible: (experience().length > 0) || (education().length > 0)">
+				<div class="page__exp-item" data-bind="visible: experience().length > 0">
 					<h3>
 						<i class="fas fa-briefcase"></i>
 						Experience
@@ -131,7 +135,7 @@
 					</div>
 					<!-- /ko -->
 				</div>
-				<div class="" style="flex-basis: 49%;margin-left: 1%;" data-bind="visible: projects().length > 0">
+				<div class="page__exp-item" data-bind="visible: projects().length > 0">
 					<h3>
 						<i class="fas fa-project-diagram"></i>
 						Personal projects
@@ -143,9 +147,16 @@
 								<img data-bind="attr:{'src': 'images/'+logo}" class="img--responsive personal__project-img">
 								<div data-bind="text: text">
 								</div>
-								<button class="btn btn-secondary btn-sm">
-									Learn more...
-								</button>
+								<!-- ko if: demoLink -->
+								<a target="_blank" data-bind="attr:{'href': demoLink}" class="btn btn-secondary btn-sm">
+									Demo
+								</a>
+								<!-- /ko -->
+								<!-- ko if: gitLink -->
+								<a target="_blank" data-bind="attr:{'href': gitLink}" class="btn btn-secondary btn-sm">
+									Code
+								</a>
+								<!-- /ko -->
 							</div>
 							<div style="flex-basis: 50%;">
 								<img data-bind="attr:{'src': 'images/'+image}" class="img--responsive">
@@ -154,6 +165,27 @@
 						<!-- /ko -->
 					</div>
 				</div>
+			</div>
+			<div class="mtop--20 card visible--sm" data-bind="visible: education().length > 0">
+				<!-- ko if: skills().length > 0 -->
+				<h3 class="text--bold">
+					<i class="fas fa-code font--17"></i>
+					Tools & Technologies
+				</h3>
+				<ul class="font--12" style="list-style: square;" data-bind="foreach: skills">
+					<li data-bind="text: text"></li>
+				</ul>
+				<!-- /ko -->
+				<!-- ko if: languages().length > 0 -->
+				<h3 class="text--bold">
+					<i class="fas fa-language font--17"></i>
+					Languages
+				</h3>
+				<div class="flex flex--row" style="justify-content: center;" data-bind="foreach: languages">
+					<div class="font--12 btn btn-light btn-sm" data-bind="text: $data">
+					</div>
+				</div>
+				<!-- /ko -->
 			</div>
 			<div class="mtop--20 card">
 				<h3>Contact me</h3>

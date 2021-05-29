@@ -4,7 +4,8 @@ define([
 	'toggler',
 	'dropdown',
 	'modal',
-	'typedBH'
+	'typedBH',
+	'copyClipboard'
 ], (ko) => {
 	class MainPage {
 		constructor(){
@@ -167,7 +168,8 @@ define([
 			this.id = data.id;
 			this.logo = data.logo;
 			this.text = data.text;
-			this.link = data.link;
+			this.demoLink = data.demoLink;
+			this.gitLink = data.gitLink;
 			this.image = data.image;
 		}
 	}

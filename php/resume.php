@@ -36,15 +36,18 @@ a{
   color: #3689CF;
   text-decoration: none;
 }
+li{
+  display: list-item;
+}
 </style>';
 
 $sk = "";
 foreach($data['skills'] as $skill){
-  $sk.="<li>".$skill['text']."</li>";
+  $sk.="<div style='margin-left: 10px;'>&#9632; ".$skill['text']."</div>";
 }
 $lang = "";
 foreach($data['languages'] as $language){
-  $lang.="<li>".$language."</li>";
+  $lang.="<div style='margin-left: 10px;'>&#9632; ".$language."</div>";
 }
 $experience = "";
 foreach($data['experience'] as $exp){
@@ -68,10 +71,17 @@ foreach($data['projects'] as $pro){
       </div>
       <p style='margin-left: 15px;'>".$pro['text']."</p>
       <div>
-        <a target='_blank' href=".$pro['link'].">Learn more...</a>
+    ";
+    if($pro['demoLink']){
+      $projects .= "<a target='_blank' href=".$pro['demoLink'].">Demo</a> | ";
+    }
+    if($pro['gitLink']){
+      $projects .= "<a target='_blank' href=".$pro['gitLink'].">Code</a>";
+    }
+    $projects .="
       </div>
     </div>
-  ";
+    ";
 }
 $education = "";
 foreach($data['education'] as $edu){
@@ -109,7 +119,7 @@ $html .="
     ".$profile['address']."
   </div>
   <div>
-    <b>".$profile['mobile']."</b>
+    <b>".$profile['phone']."</b>
   </div>
   <div>
     <a target='_blank' href=".$links['website'].">Website</a><br>
@@ -119,17 +129,12 @@ $html .="
   </div>
   <div style='margin-top: 30px;'>
   <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>TOOLS & TECHNOLOGIES</div>
-    <br>
-    <ul style='list-style: square;padding-left: 20px;'>
       ".$sk."
-    </ul>
   </div>
   <div style='margin-top: 20px;'>
   <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>LANGUAGES</div>
     <br>
-    <ul style='list-style: square;padding-left: 20px;'>
       ".$lang."
-    </ul>
   </div>
   <div style='margin-top: 20px;'>
   <div style='color: #3689CF;padding-left: 3px;font-size:10px;font-weight: bold'>EDUCATION</div>

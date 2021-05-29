@@ -10,6 +10,8 @@
 @import "partials/dropdown";
 @import "partials/tabs";
 @import "partials/spinner";
+$breakpoint1: 1150px;
+$breakpoint2: 768px;
 *{
 	box-sizing: border-box;
 }
@@ -48,8 +50,8 @@ a{
 	flex-direction: column;
 	margin: auto;
 	padding: 1rem;
-	display: flex !important;
-	flex-direction: row !important;
+	display: flex;
+	flex-direction: row;
 
 
 	.page__left{
@@ -122,5 +124,46 @@ a{
 :root[data-theme="theme-dark"] {
 	.personal__project-img{
 		filter: invert(1);
+	}
+}
+.page__exp{
+	.page__exp-item{
+		flex-basis: 49%;
+		margin-left: 1%;
+	}
+}
+.visible--sm{
+	display: none;
+}
+@media (max-width: $breakpoint1) {
+	.page__exp{
+		flex-direction: column;
+
+		.page__exp-item{
+			margin-top: rem(20px);
+			flex-basis: 100%;
+			margin-left: 0%;
+		}
+	}
+}
+@media (max-width: $breakpoint2) {
+	.page{
+		flex-direction: column;
+		padding: 0;
+	}
+	.page__left-inner{
+		display: none !important;
+	}
+	.page__left{
+		flex-basis: 12% !important;
+	}
+	.page__right{
+		padding: .2rem !important;
+		padding-top: 1rem;
+		flex-basis: 88% !important;
+	}
+	.visible--sm{
+		display: flex;
+		flex-direction: column;
 	}
 }

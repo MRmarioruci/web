@@ -73,7 +73,8 @@ function getProjects(){
 		`Projects`.`title`,
 		`Projects`.`logo`,
 		`Projects`.`text`,
-		`Projects`.`link`,
+		`Projects`.`demoLink`,
+		`Projects`.`gitLink`,
 		`Projects`.`image`
 	FROM `Projects`
 	WHERE 1';
