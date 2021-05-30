@@ -11,7 +11,7 @@ define([
 		constructor(){
 			this.inited = ko.observable(false);
 			this.generating = ko.observable(false);
-
+			this.sendStatus = ko.observable(null);
 			this.isLightTheme = ko.observable(false);
 			this.isLightTheme.subscribe( (newVal) => {
 				if(!newVal){
@@ -121,6 +121,7 @@ define([
 		}
 		_sendMessage(){
 			return new Promise( (resolve, reject) => {
+				this.sendStatus('sending');
 				$.post( '/php/controller.php', {
 					'action': 'sendMessage',
 					'name': this.name(),
@@ -130,10 +131,28 @@ define([
 				})
 				.done( (data) => {
 					if(data.status=='ok'){
+						this.sendStatus('sent')
+						setTimeout(() =>{
+							this.sendStatus(null);
+							this.name(null);
+							this.surname(null);
+							this.email(null);
+							this.message(null);
+						}, 4000);
 						resolve(data.data);
+					}else{
+						this.sendStatus('fail')
+						setTimeout(() =>{
+							this.sendStatus(null);
+						}, 4000);
+						reject();
 					}
 				})
 				.fail( (err) => {
+					this.sendStatus('fail')
+						setTimeout(() =>{
+							this.sendStatus(null);
+						}, 4000);
 					reject(err);
 				})
 			});

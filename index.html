@@ -188,6 +188,7 @@
 				<!-- /ko -->
 			</div>
 			<div class="mtop--20 card">
+				<!-- ko if: sendStatus() == null -->
 				<h3>Contact me</h3>
 				<div class="flex flex--row">
 					<div style="flex-basis: 50%;margin: 4px;">
@@ -203,11 +204,29 @@
 				<div class="flex flex--row" style="margin: 4px;">
 					<textarea data-bind="value: message, css:{'input--required':!message()}" placeholder="Message"></textarea>
 				</div>
+				<!-- /ko -->
 				<div style="margin: 4px;">
+					<!-- ko if: sendStatus() == null -->
 					<button class="btn btn-primary" data-bind="enable: canSend, click: _sendMessage">
 						<i class="fas fa-paper-plane"></i>
 						Send
 					</button>
+					<!-- /ko -->
+					<!-- ko if: sendStatus() == 'sending' -->
+					<div class="text--center">
+						<div style="margin: auto;" class="spinner-block">
+							<div class="spinner spinner-1"></div>
+						</div>
+					</div>
+					<!-- /ko -->
+					<!-- ko if: sendStatus() == 'sent' -->
+					<div class="text--center">
+						<img src="images/undraw_a_whole_year_vnfm.svg" width="200">
+						<br>
+						<h3>Thank you for reaching out!</h3>
+						<h4>I will be contacting you personally as soon as possible.</h4>
+					</div>
+					<!-- /ko -->
 				</div>
 			</div>
 		</div>

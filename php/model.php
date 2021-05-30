@@ -1,5 +1,11 @@
 <?php
 namespace Model;
+use \PHPMailer\PHPMailer\PHPMailer;
+use \PHPMailer\PHPMailer\SMTP;
+use \PHPMailer\PHPMailer\Exception;
+require 'vendor/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/src/SMTP.php';
 require_once('connection.php');
 
 function getData(){
@@ -23,9 +29,9 @@ function getData(){
 function getSkills(){
 	global $CONNECTION;
 	$q = 'SELECT
-		`Skills`.`id`,
-		`Skills`.`text`,
-		`Skills`.`icon`
+	`Skills`.`id`,
+	`Skills`.`text`,
+	`Skills`.`icon`
 	FROM `Skills`
 	WHERE 1';
 	$cq = $CONNECTION->prepare($q);
@@ -38,10 +44,10 @@ function getSkills(){
 function getEducation(){
 	global $CONNECTION;
 	$q = 'SELECT
-		`Education`.`id`,
-		`Education`.`text`,
-		`Education`.`title`,
-		`Education`.`year`
+	`Education`.`id`,
+	`Education`.`text`,
+	`Education`.`title`,
+	`Education`.`year`
 	FROM `Education`
 	WHERE 1';
 	$cq = $CONNECTION->prepare($q);
@@ -53,11 +59,11 @@ function getEducation(){
 function getExperience(){
 	global $CONNECTION;
 	$q = 'SELECT
-		`Experience`.`id`,
-		`Experience`.`text`,
-		`Experience`.`title`,
-		`Experience`.`year`,
-		`Experience`.`link`
+	`Experience`.`id`,
+	`Experience`.`text`,
+	`Experience`.`title`,
+	`Experience`.`year`,
+	`Experience`.`link`
 	FROM `Experience`
 	WHERE 1';
 	$cq = $CONNECTION->prepare($q);
@@ -69,13 +75,13 @@ function getExperience(){
 function getProjects(){
 	global $CONNECTION;
 	$q = 'SELECT
-		`Projects`.`id`,
-		`Projects`.`title`,
-		`Projects`.`logo`,
-		`Projects`.`text`,
-		`Projects`.`demoLink`,
-		`Projects`.`gitLink`,
-		`Projects`.`image`
+	`Projects`.`id`,
+	`Projects`.`title`,
+	`Projects`.`logo`,
+	`Projects`.`text`,
+	`Projects`.`demoLink`,
+	`Projects`.`gitLink`,
+	`Projects`.`image`
 	FROM `Projects`
 	WHERE 1';
 	$cq = $CONNECTION->prepare($q);
@@ -85,15 +91,42 @@ function getProjects(){
 	return NULL;
 }
 function sendMessage($name, $surname, $email, $message){
-	$message = filter_var ( $message, FILTER_SANITIZE_STRING);
-	$email = filter_var ( $email, FILTER_SANITIZE_EMAIL);
-	$html = "<div>";
-	$html .= "<br>Name: $name";
-	$html .= "<br>Surname: $surname";
-	$html .= "<br>Email: $email";
-	$html .= "<br>Message: $message";
-	mail("marioruci15@gmail.com","Website contact", $html);
-	return true;
+	$mail = new PHPMailer(true);
+	$smtp = getenv('SMTP');
+	$username = getenv('MAIL_USERNAME');
+	$password = getenv('MAIL_PASS');
+	try {
+		$email = filter_var ( $email, FILTER_SANITIZE_EMAIL);
+		$html = "<div>";
+		$html .= "<br>Name: $name";
+		$html .= "<br>Surname: $surname";
+		$html .= "<br>Email: $email";
+		$html .= "<br>Message: $message </div>";
+
+		//Server settings
+		$mail->isSMTP();                                //Send using SMTP
+		$mail->Host       = $smtp;                     //Set the SMTP server to send through
+		$mail->SMTPAuth   = true;                      //Enable SMTP authentication
+		$mail->Username   = $username;                     //SMTP username
+		$mail->Password   = $password;                               //SMTP password
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+		$mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+		//Recipients
+		$mail->setFrom($email, 'Mailer');
+		$mail->addAddress($username, 'Recipient');     //Add a recipient
+
+		//Content
+		$mail->isHTML(true);                                  //Set email format to HTML
+		$mail->Subject = 'Website contact me';
+		$mail->Body    = $html;
+		$mail->AltBody = strip_tags($html);
+
+		$mail->send();
+		return true;
+	} catch (Exception $e) {
+		return false;
+	}
 }
 function getLinks(){
 	return [
