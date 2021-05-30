@@ -3,7 +3,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property='og:title' content='Mario Ruci'/>
+	<meta property='og:image' content='images/web.png'/>
+	<meta property='og:description' content='Marios personal website'/>
+	<meta property='og:url' content=''/>
+	<link rel="shortcut icon" type="image/jpg" href="images/mario.jpg"/>
 	<script data-main="init" src="js/vendor/require.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2MZ9XRJNH"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-M2MZ9XRJNH');
+	</script>
 </head>
 <body data-bind="visible:true" style="display: none">
 	<div data-bind="page: { id: '', role:'start', withOnShow: loadPage }" class="page">
@@ -228,6 +243,10 @@
 					</div>
 					<!-- /ko -->
 				</div>
+			</div>
+			<div class="mtop--20 card text--center" style="width:100%">
+				Created by me with <i class="fas fa-heart text--danger"></i>.
+				<span>Code available <a href="https://github.com/MRmarioruci/web" target="_blank">here</a></span>
 			</div>
 		</div>
 		<!-- /ko -->
