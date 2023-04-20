@@ -2,7 +2,7 @@
 My personal website. You can use this template freely.
 
 # SETUP
-This projects runs on apache. Your virtual host conf file should look like this.
+This project runs on apache. Your virtual host conf file should look like this.
 
         <VirtualHost *:80>
                 ErrorDocument 404 /404.php
